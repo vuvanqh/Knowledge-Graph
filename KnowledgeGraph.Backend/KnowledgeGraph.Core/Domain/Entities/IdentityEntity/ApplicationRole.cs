@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
-namespace KnowledgeGraph.Infrastructure;
+namespace KnowledgeGraph.Core;
 
 public class ApplicationRole:IdentityRole<Guid>
 {
