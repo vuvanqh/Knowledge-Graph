@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="KnowledgeGraph.Backend/KnowledgeGraph.Backend.csproj" />
+  <Project Path="KnowledgeGraph.Core/KnowledgeGraph.Core.csproj" />
+  <Project Path="KnowledgeGraph.Infrastructure/KnowledgeGraph.Infrastructure.csproj" />
+</Solution>
