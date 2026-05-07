@@ -13,10 +13,11 @@ public class Program
 
         //app.UseHttpsRedirection();
 
+        app.UseRouting();
+
+        app.UseCors("AllowFrontend");
+        app.UseAuthentication();
         app.UseAuthorization();
-
-
-        app.MapControllers();
 
         app.Run();
     }

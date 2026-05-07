@@ -6,6 +6,6 @@ namespace KnowledgeGraph.Core.Applicatio;
 
 public interface IAuthenticationService
 {
-    Task LoginAsync(string username, string password);
+    Task<string> LoginAsync(string username, string password);
     Task RegisterAsync(string username, string password, string role);
 }

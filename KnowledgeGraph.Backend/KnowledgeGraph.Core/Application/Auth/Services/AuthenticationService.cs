@@ -1,5 +1,6 @@
 ﻿using KnowledgeGraph.Core.Applicatio;
 using Microsoft.AspNetCore.Identity;
+using StudentPlanner.Core.Application;
 using System.Data;
 
 namespace KnowledgeGraph.Core.Application;
@@ -9,14 +10,18 @@ public class AuthenticationService : IAuthenticationService
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly RoleManager<ApplicationRole> _roleManager;
     private readonly SignInManager<ApplicationUser> _signInManager;
-    public AuthenticationService(UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager, SignInManager<ApplicationUser> signInManager)
+    private readonly IJwtService _jwtService;
+    public AuthenticationService(UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager,
+        SignInManager<ApplicationUser> signInManager,
+        IJwtService jwtService)
     {
         _userManager = userManager;
         _roleManager = roleManager;
         _signInManager = signInManager;
+        _jwtService = jwtService;
     }
 
-    public async Task LoginAsync(string username, string password)
+    public async Task<string> LoginAsync(string username, string password)
     {
         if (string.IsNullOrWhiteSpace(username))
             throw new ArgumentException("Username cannot be empty.");
@@ -27,6 +32,11 @@ public class AuthenticationService : IAuthenticationService
         var res = await _signInManager.PasswordSignInAsync(username, password, false, false);
         if(!res.Succeeded)  
             throw new UnauthorizedAccessException("Invalid credentials.");
+
+        ApplicationUser? user = await _userManager.FindByNameAsync(username);
+
+        var token = _jwtService.CreateToken(user!);
+        return token;
         
     }
 
