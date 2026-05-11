@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
 namespace KnowledgeGraph.Core.Application;
-public class RegisterRequest
+public record RegisterRequest
 {
     [Required(ErrorMessage = "UserName is required.")] 
     public string Username { get; set; } = string.Empty;

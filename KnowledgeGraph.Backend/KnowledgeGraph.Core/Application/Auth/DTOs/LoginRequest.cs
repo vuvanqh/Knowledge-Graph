@@ -2,7 +2,7 @@
 
 namespace KnowledgeGraph.Core.Application;
 
-public class LoginRequest
+public record LoginRequest
 {
     [Required]
     public string UserName { get; set; } = string.Empty;

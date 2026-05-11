@@ -10,18 +10,21 @@ public class AuthenticationService : IAuthenticationService
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly RoleManager<ApplicationRole> _roleManager;
     private readonly SignInManager<ApplicationUser> _signInManager;
+    private readonly IRefreshTokenService _refreshTokenService;
     private readonly IJwtService _jwtService;
     public AuthenticationService(UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager,
         SignInManager<ApplicationUser> signInManager,
-        IJwtService jwtService)
+        IJwtService jwtService, 
+        IRefreshTokenService refreshTokenService)
     {
         _userManager = userManager;
         _roleManager = roleManager;
         _signInManager = signInManager;
         _jwtService = jwtService;
+        _refreshTokenService = refreshTokenService;
     }
 
-    public async Task<string> LoginAsync(string username, string password)
+    public async Task<RefreshTokenResult> LoginAsync(string username, string password)
     {
         if (string.IsNullOrWhiteSpace(username))
             throw new ArgumentException("Username cannot be empty.");
@@ -34,9 +37,13 @@ public class AuthenticationService : IAuthenticationService
             throw new UnauthorizedAccessException("Invalid credentials.");
 
         ApplicationUser? user = await _userManager.FindByNameAsync(username);
+        if (user == null)
+        {
+            throw new UnauthorizedAccessException("User doesn't exist");
+        }
 
-        var token = _jwtService.CreateToken(user!);
-        return token;
+        RefreshTokenResult refreshTokenResult = await _refreshTokenService.IssueOnLogin(user);
+        return refreshTokenResult;
         
     }
 
@@ -52,7 +59,7 @@ public class AuthenticationService : IAuthenticationService
         if (user != null)
             throw new ArgumentException($"{username} already exists.");
 
-        ApplicationUser appUser = new ApplicationUser()
+        ApplicationUser appUser = new ()
         {
             UserName = username,
         };
@@ -70,5 +77,17 @@ public class AuthenticationService : IAuthenticationService
             await _roleManager.CreateAsync(new ApplicationRole { Name = role });
         }
         await _userManager.AddToRoleAsync(appUser, role); 
+    }
+
+    public async Task<RefreshTokenResponse> RotateRefreshToken(string refreshToken)
+    {
+        (ApplicationUser user, RefreshTokenResult refreshTokenResult) = await _refreshTokenService.RotateTokenAsync(refreshToken);
+
+        return new RefreshTokenResponse()
+        {
+            AccessToken = _jwtService.CreateToken(user),
+            RefreshToken = refreshTokenResult.RefreshToken,
+            ExpirationDate = refreshTokenResult.ExpirationDate
+        };
     }
 }
