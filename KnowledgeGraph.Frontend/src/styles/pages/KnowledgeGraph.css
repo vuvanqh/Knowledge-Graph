@@ -1,0 +1,254 @@
+.kg-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 24px;
+}
+
+.kg-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.kg-header h1 {
+  font-size: 2rem;
+  margin-bottom: 4px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.kg-header p {
+  color: var(--ds-text-secondary);
+}
+
+.kg-controls {
+  display: flex;
+  gap: 8px;
+  padding: 6px;
+  border-radius: var(--ds-radius-lg);
+  align-items: center;
+}
+
+.control-btn {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--ds-text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: var(--ds-radius-md);
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.control-btn:hover {
+  background: var(--ds-bg-hover);
+  color: var(--ds-text-primary);
+}
+
+.divider {
+  width: 1px;
+  height: 20px;
+  background: var(--ds-border-strong);
+  margin: 0 4px;
+}
+
+.kg-workspace {
+  flex: 1;
+  position: relative;
+  display: flex;
+  overflow: hidden;
+}
+
+.kg-canvas-container {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  background: var(--ds-bg-panel);
+}
+
+.kg-canvas-container:active {
+  cursor: grabbing;
+}
+
+.kg-grid-bg {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.kg-layer {
+  position: absolute;
+  width: 3000px;
+  height: 3000px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.kg-node {
+  cursor: pointer;
+}
+
+.kg-node circle {
+  transition: all 0.2s;
+}
+
+.kg-sidepanel-wrapper {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  bottom: 20px;
+  width: 340px;
+  z-index: 20;
+}
+
+.kg-sidepanel {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
+
+.panel-header {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--ds-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.panel-header h3 {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--ds-text-secondary);
+}
+
+.close-btn {
+  background: transparent;
+  border: none;
+  color: var(--ds-text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--ds-radius-sm);
+  padding: 4px;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  background: var(--ds-bg-hover);
+  color: var(--ds-text-primary);
+}
+
+.panel-content {
+  padding: 24px;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.entity-title-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.entity-color-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.panel-content h4 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--ds-text-primary);
+  margin: 0;
+}
+
+.entity-meta {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.meta-tag {
+  background: var(--ds-bg-hover);
+  border: 1px solid var(--ds-border);
+  padding: 4px 10px;
+  border-radius: var(--ds-radius-full);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--ds-text-secondary);
+}
+
+.node-desc {
+  background: var(--ds-bg-subtle);
+  border: 1px solid var(--ds-border);
+  padding: 16px;
+  border-radius: var(--ds-radius-md);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin-bottom: 32px;
+  color: var(--ds-text-secondary);
+}
+
+.related-section h5 {
+  font-size: 0.85rem;
+  color: var(--ds-text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+.connection-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.connection-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  background: var(--ds-bg-hover);
+  border: 1px solid transparent;
+  border-radius: var(--ds-radius-md);
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.connection-item:hover {
+  background: var(--ds-bg-panel);
+  border-color: var(--ds-border);
+  transform: translateX(4px);
+}
+
+.connection-color {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}

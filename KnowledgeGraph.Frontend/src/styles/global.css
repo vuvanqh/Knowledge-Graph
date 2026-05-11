@@ -1,0 +1,32 @@
+@import './design-system.css';
+@import './layout/layout.css';
+@import './pages/Login.css';
+@import './pages/Dashboard.css';
+@import './pages/KnowledgeGraph.css';
+@import './pages/AiSearch.css';
+@import './pages/Documents.css';
+@import './pages/Settings.css';
+
+/* Remove old variables as they are replaced by design-system.css */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--ds-border-strong);
+  border-radius: var(--ds-radius-full);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--ds-text-tertiary);
+}
+
