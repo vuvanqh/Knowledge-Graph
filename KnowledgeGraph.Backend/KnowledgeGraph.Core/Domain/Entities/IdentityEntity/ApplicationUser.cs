@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
 namespace KnowledgeGraph.Core;
-public class ApplicationUser: IdentityUser<Guid>
+
+public class ApplicationUser : IdentityUser<Guid>
 {
     public DateTime RefreshTokenExpirationDate { get; set; }
     public string? RefreshToken { get; set; }

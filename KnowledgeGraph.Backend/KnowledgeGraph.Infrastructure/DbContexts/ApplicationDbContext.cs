@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace KnowledgeGraph.Infrastructure.DbContexts;
 
-public class ApplicationDbContext: IdentityDbContext< ApplicationUser, ApplicationRole, Guid>
+public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, Guid>
 {
-    public ApplicationDbContext(DbContextOptions opt): base(opt) { }
+    public ApplicationDbContext(DbContextOptions opt) : base(opt) { }
 }

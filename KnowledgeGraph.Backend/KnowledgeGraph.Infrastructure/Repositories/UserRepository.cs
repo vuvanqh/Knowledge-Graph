@@ -5,12 +5,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace KnowledgeGraph.Infrastructure.Repositories;
 
-public class UserRepository: IUserRepository
+public class UserRepository : IUserRepository
 {
     private readonly ApplicationDbContext _context;
     public UserRepository(ApplicationDbContext context)
     {
-        _context = context; 
+        _context = context;
     }
 
     public async Task<ApplicationUser?> GetUserByRefreshTokenAsync(string token)

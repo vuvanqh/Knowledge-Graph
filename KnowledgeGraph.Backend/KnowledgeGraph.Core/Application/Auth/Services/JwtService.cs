@@ -7,6 +7,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Cryptography;
 
 namespace KnowledgeGraph.Core.Application;
+
 public class JwtService : IJwtService
 {
     private readonly IConfiguration _config;
@@ -25,10 +26,10 @@ public class JwtService : IJwtService
             new (ClaimTypes.NameIdentifier, user.Id.ToString()),
         ];
 
-        SymmetricSecurityKey securityKey = new (Encoding.UTF8.GetBytes(_config["Jwt:Key"]!)); //secret key
-        SigningCredentials signingCredentials = new (securityKey, SecurityAlgorithms.HmacSha256);
+        SymmetricSecurityKey securityKey = new(Encoding.UTF8.GetBytes(_config["Jwt:Key"]!)); //secret key
+        SigningCredentials signingCredentials = new(securityKey, SecurityAlgorithms.HmacSha256);
 
-        JwtSecurityToken tokenGenerator = new (
+        JwtSecurityToken tokenGenerator = new(
             _config["Jwt:Issuer"],
             _config["Jwt:Audience"],
             claims,
@@ -36,7 +37,7 @@ public class JwtService : IJwtService
             signingCredentials: signingCredentials
         );
 
-        JwtSecurityTokenHandler tokenHandler = new ();
+        JwtSecurityTokenHandler tokenHandler = new();
 
         return tokenHandler.WriteToken(tokenGenerator);
     }

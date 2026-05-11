@@ -29,7 +29,7 @@ public class AuthController : ControllerBase
             return BadRequest(ex.Message);
         }
         catch (Exception ex)
-        { 
+        {
             return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
         }
     }
@@ -39,7 +39,7 @@ public class AuthController : ControllerBase
     {
         try
         {
-            RefreshTokenResult refreshTokenResult = await _authService.LoginAsync(request.UserName,request.Password);
+            RefreshTokenResult refreshTokenResult = await _authService.LoginAsync(request.UserName, request.Password);
             Response.Cookies.Append("refreshToken", refreshTokenResult.RefreshToken, new CookieOptions()
             {
                 HttpOnly = true, //prevents js/ts from reading the cookie & protects against xss attacks

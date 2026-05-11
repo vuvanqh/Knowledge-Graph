@@ -14,7 +14,7 @@ public class AuthenticationService : IAuthenticationService
     private readonly IJwtService _jwtService;
     public AuthenticationService(UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager,
         SignInManager<ApplicationUser> signInManager,
-        IJwtService jwtService, 
+        IJwtService jwtService,
         IRefreshTokenService refreshTokenService)
     {
         _userManager = userManager;
@@ -33,7 +33,7 @@ public class AuthenticationService : IAuthenticationService
             throw new ArgumentException("Password cannot be empty.");
 
         var res = await _signInManager.PasswordSignInAsync(username, password, false, false);
-        if(!res.Succeeded)  
+        if (!res.Succeeded)
             throw new UnauthorizedAccessException("Invalid credentials.");
 
         ApplicationUser? user = await _userManager.FindByNameAsync(username);
@@ -44,7 +44,7 @@ public class AuthenticationService : IAuthenticationService
 
         RefreshTokenResult refreshTokenResult = await _refreshTokenService.IssueOnLogin(user);
         return refreshTokenResult;
-        
+
     }
 
     public async Task RegisterAsync(string username, string password, string role)
@@ -59,7 +59,7 @@ public class AuthenticationService : IAuthenticationService
         if (user != null)
             throw new ArgumentException($"{username} already exists.");
 
-        ApplicationUser appUser = new ()
+        ApplicationUser appUser = new()
         {
             UserName = username,
         };
@@ -76,7 +76,7 @@ public class AuthenticationService : IAuthenticationService
         {
             await _roleManager.CreateAsync(new ApplicationRole { Name = role });
         }
-        await _userManager.AddToRoleAsync(appUser, role); 
+        await _userManager.AddToRoleAsync(appUser, role);
     }
 
     public async Task<RefreshTokenResponse> RotateRefreshToken(string refreshToken)
