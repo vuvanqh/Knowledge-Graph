@@ -2,12 +2,14 @@
 using KnowledgeGraph.Core.Applicatio;
 using KnowledgeGraph.Core.Application;
 using KnowledgeGraph.Core.Domain;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KnowledgeGraph.Backend.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
+[AllowAnonymous]
 public class AuthController : ControllerBase
 {
     private readonly IAuthenticationService _authService;
@@ -16,7 +18,7 @@ public class AuthController : ControllerBase
         _authService = authService;
     }
 
-    [HttpPost]
+    [HttpPost("register")]
     public async Task<IActionResult> Register(RegisterRequest request)
     {
         try
@@ -34,7 +36,7 @@ public class AuthController : ControllerBase
         }
     }
 
-    [HttpPost]
+    [HttpPost("login")]
     public async Task<IActionResult> Login(LoginRequest request)
     {
         try

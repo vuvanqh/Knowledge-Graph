@@ -22,6 +22,7 @@
   <ItemGroup>
     <ProjectReference Include="..\KnowledgeGraph.Core\KnowledgeGraph.Core.csproj" />
     <ProjectReference Include="..\KnowledgeGraph.Backend\KnowledgeGraph.Backend.csproj" />
+    <ProjectReference Include="..\KnowledgeGraph.Infrastructure\KnowledgeGraph.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

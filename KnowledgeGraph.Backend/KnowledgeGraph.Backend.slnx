@@ -2,4 +2,5 @@
   <Project Path="KnowledgeGraph.Backend/KnowledgeGraph.Backend.csproj" />
   <Project Path="KnowledgeGraph.Core/KnowledgeGraph.Core.csproj" />
   <Project Path="KnowledgeGraph.Infrastructure/KnowledgeGraph.Infrastructure.csproj" />
+  <Project Path="KnowledgeGraph.Tests/KnowledgeGraph.Tests.csproj" Id="3980b302-95a8-46ce-b889-f6ff612131d9" />
 </Solution>

@@ -60,6 +60,8 @@ public class RefreshTokenService : IRefreshTokenService
         user.RefreshToken = tokenHash;
         user.RefreshTokenIssuedAt = DateTime.UtcNow;
 
+        await _userManager.UpdateAsync(user);
+
         return result;
     }
 }

@@ -1,6 +1,8 @@
-﻿using KnowledgeGraph.Infrastructure.DbContexts;
+﻿using KnowledgeGraph.Core;
+using KnowledgeGraph.Infrastructure.DbContexts;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
@@ -19,14 +21,14 @@ public static class BaselineConfigExtention
 
         services.AddCors(opt =>
         {
-            opt.AddPolicy("Allow Frontend", policy =>
+            opt.AddPolicy("AllowFrontend", policy =>
             {
                 var origin = config.GetSection("AllowedOrigins").Get<string[]>() ?? Array.Empty<string>();
 
                 policy.AllowAnyHeader();
                 policy.AllowAnyMethod();
                 policy.AllowCredentials();
-                policy.WithOrigins();
+                policy.WithOrigins(origin);
             });
         });
 
@@ -51,6 +53,10 @@ public static class BaselineConfigExtention
             //options.ConfigureWarnings(w => w.Ignore(RelationalEventId.PendingModelChangesWarning));
             //options.EnableSensitiveDataLogging();
         });
+
+        services.AddIdentity<ApplicationUser, ApplicationRole>()
+            .AddEntityFrameworkStores<ApplicationDbContext>()
+            .AddDefaultTokenProviders();
 
         services.AddAuthentication(options =>
         {
