@@ -15,5 +15,5 @@ See: [Architecture Document](docs/architecture.md)
 ## Tech Stack
 - ASP.NET Core (API Gateway)
 - Python (ML/LLM services)
-- PostgreSQL, Neo4j, Vector DB
+- MSSQL, Neo4j, Vector DB
 - React (frontend)
